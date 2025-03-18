@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./moji-web-frontend-main
+      dockerfile: Dockerfile
+    container_name: moji-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - moji-network
+
+  backend:
+    build:
+      context: ./moji-web-main
+      dockerfile: Dockerfile
+    container_name: moji-backend
+    ports:
+      - "3001:3001"
+    networks:
+      - moji-network
+    environment:
+      - NODE_ENV=production
+
+networks:
+  moji-network:
+    driver: bridge
